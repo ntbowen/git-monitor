@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 
 
 class StateManager:
-    """管理监控状态的持久化"""
+    """管理监控状态的持久化（支持多仓库）"""
     
     def __init__(self, state_file: str = ".monitor_state.json"):
         self.state_file = Path(state_file)
@@ -27,12 +27,18 @@ class StateManager:
                     return json.load(f)
             except Exception as e:
                 print(f"⚠️ 加载状态文件失败: {e}")
-        return {
-            "last_commit": None,
-            "last_tag": None,
-            "last_release": None,
-            "last_check": None
-        }
+        return {}
+    
+    def get_repo_state(self, repo: str) -> Dict:
+        """获取指定仓库的状态"""
+        if repo not in self.state:
+            self.state[repo] = {
+                "last_commit": None,
+                "last_tag": None,
+                "last_release": None,
+                "last_check": None
+            }
+        return self.state[repo]
     
     def save_state(self):
         """保存状态到文件"""
@@ -43,10 +49,11 @@ class StateManager:
         except Exception as e:
             print(f"⚠️ 保存状态失败: {e}")
     
-    def update(self, key: str, value):
-        """更新状态"""
-        self.state[key] = value
-        self.state["last_check"] = datetime.now().isoformat()
+    def update(self, repo: str, key: str, value):
+        """更新指定仓库的状态"""
+        repo_state = self.get_repo_state(repo)
+        repo_state[key] = value
+        repo_state["last_check"] = datetime.now().isoformat()
 
 
 class GitHubMonitor:
@@ -270,16 +277,78 @@ def format_release_message(release: Dict, repo: str) -> tuple:
     return title, content, release['url']
 
 
+def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonitor, notifiers: List):
+    """监控单个仓库"""
+    print(f"\n📦 监控仓库: {repo}")
+    print("-" * 60)
+    
+    repo_state = state_mgr.get_repo_state(repo)
+    
+    # 检查 commits
+    print("🔍 检查最新 commit...")
+    latest_commit = monitor.get_latest_commit()
+    if latest_commit:
+        if repo_state["last_commit"] != latest_commit["sha"]:
+            if repo_state["last_commit"] is not None:  # 不是首次运行
+                print(f"✨ 发现新 commit: {latest_commit['sha']}")
+                title, content, url = format_commit_message(latest_commit, repo)
+                for notifier in notifiers:
+                    notifier.send(title, content, url)
+            else:
+                print(f"📌 初始 commit: {latest_commit['sha']}")
+            state_mgr.update(repo, "last_commit", latest_commit["sha"])
+        else:
+            print("  无新 commit")
+    
+    # 检查 tags
+    print("🔍 检查最新 tag...")
+    latest_tag = monitor.get_latest_tag()
+    if latest_tag:
+        if repo_state["last_tag"] != latest_tag["name"]:
+            if repo_state["last_tag"] is not None:
+                print(f"✨ 发现新 tag: {latest_tag['name']}")
+                title, content, url = format_tag_message(latest_tag, repo)
+                for notifier in notifiers:
+                    notifier.send(title, content, url)
+            else:
+                print(f"📌 初始 tag: {latest_tag['name']}")
+            state_mgr.update(repo, "last_tag", latest_tag["name"])
+        else:
+            print("  无新 tag")
+    
+    # 检查 releases
+    print("🔍 检查最新 release...")
+    latest_release = monitor.get_latest_release()
+    if latest_release:
+        if repo_state["last_release"] != latest_release["tag"]:
+            if repo_state["last_release"] is not None:
+                print(f"✨ 发现新 release: {latest_release['name']}")
+                title, content, url = format_release_message(latest_release, repo)
+                for notifier in notifiers:
+                    notifier.send(title, content, url)
+            else:
+                print(f"📌 初始 release: {latest_release['name']}")
+            state_mgr.update(repo, "last_release", latest_release["tag"])
+        else:
+            print("  无新 release")
+
+
 def main():
     """主函数"""
     print("=" * 60)
     print("🔍 Git Repository Monitor 启动")
     print("=" * 60)
     
-    # 获取配置
-    repo = os.getenv("MONITORED_REPO")
-    if not repo:
-        print("❌ 错误: 未设置 MONITORED_REPO")
+    # 获取配置 - 支持单个或多个仓库
+    repos_str = os.getenv("MONITORED_REPOS") or os.getenv("MONITORED_REPO")
+    if not repos_str:
+        print("❌ 错误: 未设置 MONITORED_REPOS 或 MONITORED_REPO")
+        return
+    
+    # 解析仓库列表（支持逗号分隔）
+    repos = [r.strip() for r in repos_str.split(',') if r.strip()]
+    if not repos:
+        print("❌ 错误: 仓库列表为空")
         return
     
     github_token = os.getenv("GITHUB_TOKEN")
@@ -289,11 +358,12 @@ def main():
     wxpusher_uid = os.getenv("WXPUSHER_UID")
     pushplus_token = os.getenv("PUSHPLUS_TOKEN")
     
-    print(f"📦 监控仓库: {repo}")
+    print(f"📋 监控仓库数量: {len(repos)}")
+    for i, repo in enumerate(repos, 1):
+        print(f"   {i}. {repo}")
     
     # 初始化服务
     state_mgr = StateManager()
-    monitor = GitHubMonitor(repo, github_token)
     notifiers = []
     
     if telegram_token and telegram_chat_id:
@@ -311,57 +381,17 @@ def main():
     if not notifiers:
         print("⚠️ 警告: 未配置任何通知服务")
     
-    print("-" * 60)
-    
-    # 检查 commits
-    print("🔍 检查最新 commit...")
-    latest_commit = monitor.get_latest_commit()
-    if latest_commit:
-        if state_mgr.state["last_commit"] != latest_commit["sha"]:
-            if state_mgr.state["last_commit"] is not None:  # 不是首次运行
-                print(f"✨ 发现新 commit: {latest_commit['sha']}")
-                title, content, url = format_commit_message(latest_commit, repo)
-                for notifier in notifiers:
-                    notifier.send(title, content, url)
-            else:
-                print(f"📌 初始 commit: {latest_commit['sha']}")
-            state_mgr.update("last_commit", latest_commit["sha"])
-        else:
-            print("  无新 commit")
-    
-    # 检查 tags
-    print("🔍 检查最新 tag...")
-    latest_tag = monitor.get_latest_tag()
-    if latest_tag:
-        if state_mgr.state["last_tag"] != latest_tag["name"]:
-            if state_mgr.state["last_tag"] is not None:
-                print(f"✨ 发现新 tag: {latest_tag['name']}")
-                title, content, url = format_tag_message(latest_tag, repo)
-                for notifier in notifiers:
-                    notifier.send(title, content, url)
-            else:
-                print(f"📌 初始 tag: {latest_tag['name']}")
-            state_mgr.update("last_tag", latest_tag["name"])
-        else:
-            print("  无新 tag")
-    
-    # 检查 releases
-    print("🔍 检查最新 release...")
-    latest_release = monitor.get_latest_release()
-    if latest_release:
-        if state_mgr.state["last_release"] != latest_release["tag"]:
-            if state_mgr.state["last_release"] is not None:
-                print(f"✨ 发现新 release: {latest_release['name']}")
-                title, content, url = format_release_message(latest_release, repo)
-                for notifier in notifiers:
-                    notifier.send(title, content, url)
-            else:
-                print(f"📌 初始 release: {latest_release['name']}")
-            state_mgr.update("last_release", latest_release["tag"])
-        else:
-            print("  无新 release")
+    # 遍历监控所有仓库
+    for repo in repos:
+        try:
+            monitor = GitHubMonitor(repo, github_token)
+            monitor_repository(repo, state_mgr, monitor, notifiers)
+        except Exception as e:
+            print(f"❌ 监控仓库 {repo} 时出错: {e}")
+            continue
     
     # 保存状态
+    print("\n" + "-" * 60)
     state_mgr.save_state()
     
     print("-" * 60)

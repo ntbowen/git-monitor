@@ -28,6 +28,7 @@ jobs:
         
     - name: Run monitor script
       env:
+        MONITORED_REPOS: ${{ secrets.MONITORED_REPOS }}
         MONITORED_REPO: ${{ secrets.MONITORED_REPO }}
         CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

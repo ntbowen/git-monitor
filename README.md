@@ -29,7 +29,13 @@ cd <your-repo-name>
 
 | Secret 名称 | 说明 | 示例 |
 |------------|------|------|
-| `MONITORED_REPO` | 要监控的仓库 | `torvalds/linux` |
+| `MONITORED_REPOS` | 要监控的仓库列表（多个仓库用逗号分隔） | `torvalds/linux,microsoft/vscode` |
+| `MONITORED_REPO` | 单个仓库监控（向后兼容，建议使用上面的） | `torvalds/linux` |
+
+**说明：**
+- 优先使用 `MONITORED_REPOS` 支持多仓库监控
+- 多个仓库用英文逗号分隔，如：`owner1/repo1,owner2/repo2,owner3/repo3`
+- 如果只监控一个仓库，两个配置都可以使用
 
 #### Telegram 配置（可选）
 
