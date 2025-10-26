@@ -153,8 +153,8 @@ export TELEGRAM_CHAT_ID="your_chat_id"
 export WXPUSHER_APP_TOKEN="your_app_token"
 export WXPUSHER_UID="your_uid"
 
-# 可选：GitHub Token（提高 API 限制）
-export GITHUB_TOKEN="your_github_token"
+# 可选：GitHub PAT（提高 API 限制或访问私有仓库）
+export GITHUB_TOKEN="your_github_pat"
 ```
 
 ### 运行脚本
@@ -238,19 +238,20 @@ Commit: def5678
 ### Q: API 限流怎么办？
 
 **A:** 
-- 未认证的请求：每小时 60 次
-- 认证后的请求：每小时 5000 次
-- 建议配置 `GITHUB_TOKEN` 以提高限制
+- 自动提供的 token：每小时 1000 次（足够使用）
+- Personal Access Token：每小时 5000 次
 
-创建 GitHub Token：Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token
-
-权限选择：只需要 `public_repo`（如果监控私有仓库则需要 `repo`）
+**如需更高限制，可配置 `GH_PAT`：**
+1. GitHub 头像 → Settings → Developer settings
+2. Personal access tokens → Tokens (classic) → Generate new token
+3. 权限：`public_repo`（私有仓库需要 `repo`）
+4. 在仓库 Secrets 中添加名为 `GH_PAT` 的 secret（不能使用 `GITHUB_` 前缀）
 
 ### Q: 能监控私有仓库吗？
 
 **A:** 可以。需要：
-1. 创建具有 `repo` 权限的 GitHub Token
-2. 在 Secrets 中添加 `GITHUB_TOKEN`
+1. 创建具有 `repo` 权限的 GitHub Personal Access Token
+2. 在 Secrets 中添加 `GH_PAT`（注意：不能使用 `GITHUB_` 前缀）
 
 ### Q: 如何监控多个仓库？
 

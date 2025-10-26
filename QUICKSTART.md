@@ -82,15 +82,18 @@ Settings → Secrets and variables → Actions → New repository secret
 - 每 6 小时: `0 */6 * * *`
 - 每天一次: `0 0 * * *`
 
-### 提高 API 限制
+### 提高 API 限制（可选）
 
-添加 `GITHUB_TOKEN` secret：
+如需更高 API 限制或访问私有仓库，添加 `GH_PAT` secret：
 
 1. GitHub 头像 → Settings
 2. Developer settings → Personal access tokens → Tokens (classic)
 3. Generate new token
-4. 勾选 `public_repo`
+4. 选择 `public_repo` 权限（私有仓库需要 `repo`）
 5. 复制生成的 token
+6. 添加到 Secrets，名称：`GH_PAT`（⚠️ 不能使用 `GITHUB_` 前缀）
+
+**说明**：GitHub Actions 默认提供的 token（每小时 1000 次）通常已足够使用。
 
 ## 常见问题
 

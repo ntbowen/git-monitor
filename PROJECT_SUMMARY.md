@@ -97,17 +97,18 @@ GitHub Repo → GitHub API → Monitor Script → Notification Services
 | TELEGRAM_CHAT_ID | Telegram Chat ID | - |
 | WXPUSHER_APP_TOKEN | WxPusher App Token | - |
 | WXPUSHER_UID | WxPusher 用户 UID | - |
-| GITHUB_TOKEN | GitHub Token | 自动提供 |
+| PUSHPLUS_TOKEN | PushPlus Token | - |
+| GH_PAT | GitHub Personal Access Token | 可选 |
 | CRON_SCHEDULE | Cron 表达式 | `0 * * * *` |
 
 ## API 限制
 
 ### GitHub API 速率限制
 
-- **未认证**: 60 次/小时
-- **已认证**: 5000 次/小时
+- **默认（自动提供的 token）**: 1000 次/小时
+- **Personal Access Token**: 5000 次/小时
 
-**建议**: 配置 GITHUB_TOKEN 以提高限制
+**说明**: Actions 自动提供的 token 通常已足够。如需更高限制，可配置 `GH_PAT`。
 
 ### Telegram API
 - 无严格限制
@@ -125,9 +126,9 @@ GitHub Repo → GitHub API → Monitor Script → Notification Services
 - 使用 GitHub 的加密存储
 
 ### 权限要求
-- **监控公开仓库**: 无需特殊权限
-- **监控私有仓库**: 需要 `repo` 权限的 token
-- **写入状态文件**: Actions 自动提供的 GITHUB_TOKEN
+- **监控公开仓库**: 使用默认权限即可
+- **监控私有仓库**: 需要配置具有 `repo` 权限的 `GH_PAT`
+- **写入状态文件**: Actions 自动提供的 token
 
 ## 扩展性
 

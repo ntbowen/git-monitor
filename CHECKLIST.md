@@ -37,9 +37,10 @@
 
 ### 可选优化
 
-- [ ] **GITHUB_TOKEN** 已配置（提高 API 限制）
-  - 从 GitHub Settings → Developer settings 创建
+- [ ] **GH_PAT** 已配置（提高 API 限制或访问私有仓库）
+  - 从 GitHub Settings → Developer settings 创建 Personal Access Token
   - 权限：`public_repo`（公开仓库）或 `repo`（私有仓库）
+  - ⚠️ 注意：Secret 名称不能以 `GITHUB_` 开头，使用 `GH_PAT`
 
 - [ ] **CRON_SCHEDULE** 已配置（自定义频率）
   - 默认：`0 * * * *`（每小时）
@@ -98,16 +99,17 @@
    - 确保值没有多余空格
 
 3. **检查 API 限制**
-   - 如提示限流，配置 GITHUB_TOKEN
-   - 降低检查频率
+   - 默认限制：每小时 1000 次（足够使用）
+   - 如需更高限制，配置 GH_PAT
+   - 或降低检查频率
 
 4. **测试通知服务**
-   - Telegram: 直接向 bot 发送消息测试
-   - 微信: 在 WxPusher 管理后台发送测试消息
+   - Telegram：发送测试消息给 bot
+   - 微信：检查 WxPusher/PushPlus 配置
 
 5. **查看仓库权限**
    - 公开仓库：无需额外配置
-   - 私有仓库：必须配置有 `repo` 权限的 GITHUB_TOKEN
+   - 私有仓库：必须配置有 `repo` 权限的 `GH_PAT`
 
 ## 🎉 完成！
 

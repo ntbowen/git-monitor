@@ -36,7 +36,8 @@ jobs:
         WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
         WXPUSHER_UID: ${{ secrets.WXPUSHER_UID }}
         PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # GITHUB_TOKEN 自动提供，或使用自定义 PAT
+        GITHUB_TOKEN: ${{ secrets.GH_PAT || github.token }}
       run: |
         python scripts/monitor.py
         
