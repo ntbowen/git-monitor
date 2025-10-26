@@ -198,6 +198,43 @@ class WxPusherNotifier(NotificationService):
             return False
 
 
+class PushPlusNotifier(NotificationService):
+    """PushPlus 微信通知服务"""
+    
+    def __init__(self, token: str):
+        self.token = token
+        self.base_url = "http://www.pushplus.plus/send"
+    
+    def send(self, title: str, content: str, url: Optional[str] = None) -> bool:
+        """发送微信消息"""
+        try:
+            # 格式化为 HTML
+            html_content = content.replace('\n', '<br>')
+            if url:
+                html_content += f'<br><br><a href="{url}">🔗 查看详情</a>'
+            
+            response = requests.post(
+                self.base_url,
+                json={
+                    "token": self.token,
+                    "title": title,
+                    "content": html_content,
+                    "template": "html"
+                }
+            )
+            response.raise_for_status()
+            result = response.json()
+            if result.get("code") == 200:
+                print(f"✓ PushPlus 通知已发送")
+                return True
+            else:
+                print(f"⚠️ PushPlus 发送失败: {result.get('msg')}")
+                return False
+        except Exception as e:
+            print(f"⚠️ PushPlus 发送失败: {e}")
+            return False
+
+
 def format_commit_message(commit: Dict, repo: str) -> tuple:
     """格式化 commit 消息"""
     title = f"📝 {repo} 新提交"
@@ -250,6 +287,7 @@ def main():
     telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
     wxpusher_token = os.getenv("WXPUSHER_APP_TOKEN")
     wxpusher_uid = os.getenv("WXPUSHER_UID")
+    pushplus_token = os.getenv("PUSHPLUS_TOKEN")
     
     print(f"📦 监控仓库: {repo}")
     
@@ -264,7 +302,11 @@ def main():
     
     if wxpusher_token and wxpusher_uid:
         notifiers.append(WxPusherNotifier(wxpusher_token, wxpusher_uid))
-        print("✓ 微信通知已启用")
+        print("✓ WxPusher 通知已启用")
+    
+    if pushplus_token:
+        notifiers.append(PushPlusNotifier(pushplus_token))
+        print("✓ PushPlus 通知已启用")
     
     if not notifiers:
         print("⚠️ 警告: 未配置任何通知服务")

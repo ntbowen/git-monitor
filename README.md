@@ -46,7 +46,9 @@ cd <your-repo-name>
 4. 获得 Bot Token（格式：`1234567890:ABCdefGhIJKlmNoPQRsTUVwxyZ`）
 5. 搜索 `@userinfobot`，发送任意消息获取你的 Chat ID
 
-#### 微信配置（可选）
+#### 微信配置（可选，选择其中一个或多个）
+
+**方案1：WxPusher**
 
 | Secret 名称 | 说明 | 获取方式 |
 |------------|------|---------|
@@ -60,6 +62,19 @@ cd <your-repo-name>
 3. 创建应用，获取 `APP_TOKEN`
 4. 微信扫码关注 WxPusher 公众号
 5. 在公众号中点击"我的" → "我的UID"获取 `UID`
+
+**方案2：PushPlus（推荐，更简单）**
+
+| Secret 名称 | 说明 | 获取方式 |
+|------------|------|---------|
+| `PUSHPLUS_TOKEN` | PushPlus Token | [PushPlus官网](http://www.pushplus.plus) 注册并获取Token |
+
+**获取 PushPlus 配置步骤：**
+
+1. 访问 [PushPlus 官网](http://www.pushplus.plus)
+2. 使用微信扫码登录
+3. 在"发送消息"页面找到你的 `Token`
+4. 复制 Token 即可使用
 
 #### 可选配置
 
