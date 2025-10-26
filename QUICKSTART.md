@@ -14,6 +14,11 @@ Settings → Secrets and variables → Actions → New repository secret
 
 添加一个 secret：
 
+**监控多个仓库（推荐）：**
+- **Name**: `MONITORED_REPOS`
+- **Secret**: `torvalds/linux,microsoft/vscode` （替换为你要监控的仓库，用逗号分隔）
+
+**或监控单个仓库：**
 - **Name**: `MONITORED_REPO`
 - **Secret**: `torvalds/linux` （替换为你要监控的仓库）
 

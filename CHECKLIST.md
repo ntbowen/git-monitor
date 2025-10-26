@@ -6,8 +6,9 @@
 
 ### 必需项
 
-- [ ] **MONITORED_REPO** 已配置
-  - 格式：`owner/repo`（如 `torvalds/linux`）
+- [ ] **MONITORED_REPOS** 或 **MONITORED_REPO** 已配置
+  - **多仓库**：`MONITORED_REPOS=owner1/repo1,owner2/repo2`
+  - **单仓库**：`MONITORED_REPO=owner/repo`
   - 路径：Settings → Secrets and variables → Actions
 
 ### Telegram 配置（二选一或全选）
@@ -20,7 +21,7 @@
   - 从 @userinfobot 获取
   - 格式：数字 ID（如 `123456789`）
 
-### 微信配置（二选一或全选）
+### 微信配置（三选一或全选）
 
 - [ ] **WXPUSHER_APP_TOKEN** 已配置
   - 从 wxpusher.zjiecode.com 获取
@@ -29,6 +30,10 @@
 - [ ] **WXPUSHER_UID** 已配置
   - 从微信公众号获取
   - 格式：`UID_...`
+
+- [ ] **PUSHPLUS_TOKEN** 已配置（推荐）
+  - 从 www.pushplus.plus 获取
+  - 格式：Token 字符串
 
 ### 可选优化
 
