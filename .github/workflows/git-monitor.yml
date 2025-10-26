@@ -1,0 +1,49 @@
+name: Git Repository Monitor
+
+on:
+  schedule:
+    # 默认每小时执行一次，可通过 CRON_SCHEDULE secret 自定义
+    - cron: '0 * * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install requests
+        
+    - name: Run monitor script
+      env:
+        MONITORED_REPO: ${{ secrets.MONITORED_REPO }}
+        CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
+        WXPUSHER_UID: ${{ secrets.WXPUSHER_UID }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python scripts/monitor.py
+        
+    - name: Commit state file if changed
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add -A
+        git diff --staged --quiet || git commit -m "Update monitor state [skip ci]"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
