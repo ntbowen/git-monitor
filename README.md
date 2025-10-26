@@ -142,18 +142,23 @@ pip install -r requirements.txt
 ### 设置环境变量
 
 ```bash
-# 必需
-export MONITORED_REPO="owner/repo"
+# 必需 - 支持多仓库（逗号分隔）
+export MONITORED_REPOS="owner1/repo1,owner2/repo2"
+# 或单个仓库
+# export MONITORED_REPO="owner/repo"
 
 # 可选：Telegram
 export TELEGRAM_BOT_TOKEN="your_bot_token"
 export TELEGRAM_CHAT_ID="your_chat_id"
 
-# 可选：微信
+# 可选：微信（三选一或多选）
 export WXPUSHER_APP_TOKEN="your_app_token"
 export WXPUSHER_UID="your_uid"
+export PUSHPLUS_TOKEN="your_pushplus_token"
 
 # 可选：GitHub PAT（提高 API 限制或访问私有仓库）
+# 注意：本地测试时环境变量名为 GITHUB_TOKEN
+# 但在 GitHub Secrets 中必须使用 GH_PAT（不能以 GITHUB_ 开头）
 export GITHUB_TOKEN="your_github_pat"
 ```
 
@@ -255,9 +260,10 @@ Commit: def5678
 
 ### Q: 如何监控多个仓库？
 
-**A:** 目前版本每个工作流实例只能监控一个仓库。如需监控多个仓库，可以：
-1. Fork 多个副本分别配置
-2. 修改脚本支持多仓库（需要自定义开发）
+**A:** 支持同时监控多个仓库：
+1. 在 Secrets 中设置 `MONITORED_REPOS`（多个仓库用逗号分隔）
+2. 示例：`torvalds/linux,microsoft/vscode,golang/go`
+3. 每个仓库的状态独立管理，互不影响
 
 ### Q: 状态文件是什么？
 
