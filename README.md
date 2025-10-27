@@ -33,7 +33,6 @@ cd <your-repo-name>
 |------------|------|------|
 | `MONITORED_REPOS` | 要监控的仓库列表（多个仓库用逗号分隔） | `torvalds/linux,microsoft/vscode` |
 | `MONITORED_REPO` | 单个仓库监控（向后兼容） | `torvalds/linux` |
-| `CRON_SCHEDULE` | 定时任务间隔（可选） | `0 */6 * * *` |
 
 **优势：**
 - ✅ 可直接查看和编辑，无需重新输入
@@ -43,7 +42,6 @@ cd <your-repo-name>
 **说明：**
 - 优先使用 `MONITORED_REPOS` 支持多仓库监控
 - 多个仓库用英文逗号分隔，如：`owner1/repo1,owner2/repo2,owner3/repo3`
-- `CRON_SCHEDULE` 默认每小时执行，可自定义（如 `0 */6 * * *` 每6小时）
 
 #### 🔐 Secrets（敏感信息）
 
@@ -254,9 +252,24 @@ Commit: def5678
 
 ### Q: 如何修改检查频率？
 
-**A:** 有两种方式：
-1. 在 GitHub **Variables** 中设置 `CRON_SCHEDULE`（推荐，可随时查看和修改）
-2. 直接修改 `.github/workflows/git-monitor.yml` 中的 `cron` 值
+**A:** 需要直接编辑工作流文件：
+
+1. 编辑 `.github/workflows/git-monitor.yml`
+2. 修改第6行的 `cron` 值：
+   ```yaml
+   schedule:
+     - cron: '0 */6 * * *'  # 修改这里
+   ```
+3. 提交并推送更改
+
+**常用间隔：**
+- 每小时：`0 * * * *`
+- 每2小时：`0 */2 * * *`
+- 每6小时：`0 */6 * * *`
+- 每12小时：`0 */12 * * *`
+- 每天：`0 0 * * *`
+
+⚠️ **注意：** GitHub Actions 的 `schedule` 触发器不支持使用变量，必须硬编码在工作流文件中。
 
 ### Q: API 限流怎么办？
 
