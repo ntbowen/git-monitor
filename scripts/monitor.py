@@ -346,10 +346,18 @@ def main():
         return
     
     # 解析仓库列表（支持逗号分隔）
-    repos = [r.strip() for r in repos_str.split(',') if r.strip()]
-    if not repos:
+    repos_raw = [r.strip() for r in repos_str.split(',') if r.strip()]
+    if not repos_raw:
         print("❌ 错误: 仓库列表为空")
         return
+    
+    # 去重（保持顺序）
+    repos = list(dict.fromkeys(repos_raw))
+    
+    # 显示去重信息
+    if len(repos) < len(repos_raw):
+        duplicate_count = len(repos_raw) - len(repos)
+        print(f"⚠️ 发现 {duplicate_count} 个重复仓库，已自动去重")
     
     github_token = os.getenv("GITHUB_TOKEN")
     telegram_token = os.getenv("TELEGRAM_BOT_TOKEN")
