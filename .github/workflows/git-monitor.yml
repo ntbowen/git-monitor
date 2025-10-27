@@ -2,8 +2,8 @@ name: Git Repository Monitor
 
 on:
   schedule:
-    # 每6小时执行一次（修改此处可调整定时间隔）
-    - cron: '0 */6 * * *'
+    # 每小时执行一次（修改此处可调整定时间隔）
+    - cron: '0 * * * *'
   workflow_dispatch:  # 允许手动触发
 
 permissions:
