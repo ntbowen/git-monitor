@@ -30,10 +30,10 @@
     "last_check": "2025-10-27T11:50:20.153697"
   },
   "byJoey/cfnew": {
-    "last_commit": "28da398",
+    "last_commit": "ff333af",
     "last_tag": "v1.1.3",
     "last_release": null,
-    "last_check": "2025-10-27T13:34:08.813916"
+    "last_check": "2025-10-27T14:23:30.502103"
   },
   "byJoey/yx-tools": {
     "last_commit": "43784c4",
@@ -84,10 +84,10 @@
     "last_check": "2025-10-27T11:50:25.060894"
   },
   "cmliu/WorkerVless2sub": {
-    "last_commit": "40d388b",
+    "last_commit": "16d8674",
     "last_tag": null,
     "last_release": null,
-    "last_check": "2025-10-27T11:50:25.238297"
+    "last_check": "2025-10-27T14:23:41.457196"
   },
   "containers/conmon": {
     "last_commit": "42da7ac",
@@ -108,10 +108,10 @@
     "last_check": "2025-10-27T11:50:27.272801"
   },
   "containers/podman": {
-    "last_commit": "8f08e81",
+    "last_commit": "1ac43d6",
     "last_tag": "v5.7.0-rc1",
     "last_release": "v5.6.2",
-    "last_check": "2025-10-27T13:34:18.165639"
+    "last_check": "2025-10-27T14:23:46.712868"
   },
   "containers/podman-tui": {
     "last_commit": "9568df3",
@@ -187,9 +187,9 @@
   },
   "MoonTechLab/Selene": {
     "last_commit": "09c16e4",
-    "last_tag": "v1.6.3",
-    "last_release": "v1.6.3",
-    "last_check": "2025-10-27T11:50:35.710649"
+    "last_tag": "v1.6.4",
+    "last_release": "v1.6.4",
+    "last_check": "2025-10-27T14:24:03.033447"
   },
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
