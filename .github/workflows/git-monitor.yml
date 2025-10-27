@@ -49,6 +49,16 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add -A
         if ! git diff --staged --quiet; then
-          git commit -m "Update monitor state [skip ci]"
+          # 读取摘要作为 commit 消息
+          if [ -f .monitor_summary.txt ]; then
+            SUMMARY=$(cat .monitor_summary.txt | head -20)
+            if [ -n "$SUMMARY" ]; then
+              git commit -m "Update monitor state [skip ci]" -m "$SUMMARY"
+            else
+              git commit -m "Update monitor state [skip ci]"
+            fi
+          else
+            git commit -m "Update monitor state [skip ci]"
+          fi
           git push
         fi

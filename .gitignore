@@ -1,3 +1,6 @@
+# Monitor files
+.monitor_summary.txt
+
 # Python
 __pycache__/
 *.py[cod]

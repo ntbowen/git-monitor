@@ -18,6 +18,7 @@ class StateManager:
     def __init__(self, state_file: str = ".monitor_state.json"):
         self.state_file = Path(state_file)
         self.state = self._load_state()
+        self.changes = []  # 记录本次运行的变化
     
     def _load_state(self) -> Dict:
         """加载状态文件"""
@@ -54,6 +55,30 @@ class StateManager:
         repo_state = self.get_repo_state(repo)
         repo_state[key] = value
         repo_state["last_check"] = datetime.now().isoformat()
+    
+    def add_change(self, change_type: str, repo: str, info: str):
+        """记录一次变化"""
+        self.changes.append({
+            "type": change_type,
+            "repo": repo,
+            "info": info
+        })
+    
+    def save_summary(self):
+        """保存变化摘要到文件"""
+        summary_file = Path(".monitor_summary.txt")
+        try:
+            if self.changes:
+                with open(summary_file, 'w', encoding='utf-8') as f:
+                    for change in self.changes:
+                        f.write(f"[{change['type']}] {change['repo']}: {change['info']}\n")
+                print(f"✓ 变化摘要已保存: {len(self.changes)} 项")
+            else:
+                # 没有变化，写入默认消息
+                with open(summary_file, 'w', encoding='utf-8') as f:
+                    f.write("No new changes detected\n")
+        except Exception as e:
+            print(f"⚠️ 保存摘要失败: {e}")
 
 
 class GitHubMonitor:
@@ -294,6 +319,8 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
                 title, content, url = format_commit_message(latest_commit, repo)
                 for notifier in notifiers:
                     notifier.send(title, content, url)
+                # 记录变化
+                state_mgr.add_change("COMMIT", repo, f"{latest_commit['sha']} - {latest_commit['message']}")
             else:
                 print(f"📌 初始 commit: {latest_commit['sha']}")
             state_mgr.update(repo, "last_commit", latest_commit["sha"])
@@ -310,6 +337,8 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
                 title, content, url = format_tag_message(latest_tag, repo)
                 for notifier in notifiers:
                     notifier.send(title, content, url)
+                # 记录变化
+                state_mgr.add_change("TAG", repo, latest_tag["name"])
             else:
                 print(f"📌 初始 tag: {latest_tag['name']}")
             state_mgr.update(repo, "last_tag", latest_tag["name"])
@@ -326,6 +355,8 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
                 title, content, url = format_release_message(latest_release, repo)
                 for notifier in notifiers:
                     notifier.send(title, content, url)
+                # 记录变化
+                state_mgr.add_change("RELEASE", repo, latest_release["name"])
             else:
                 print(f"📌 初始 release: {latest_release['name']}")
             state_mgr.update(repo, "last_release", latest_release["tag"])
@@ -402,9 +433,10 @@ def main():
             print(f"❌ 监控仓库 {repo} 时出错: {e}")
             continue
     
-    # 保存状态
+    # 保存状态和摘要
     print("\n" + "-" * 60)
     state_mgr.save_state()
+    state_mgr.save_summary()
     
     print("-" * 60)
     print(f"✅ 监控完成 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
