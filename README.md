@@ -255,7 +255,7 @@ Commit: def5678
 ### Q: 如何修改检查频率？
 
 **A:** 有两种方式：
-1. 在 GitHub Secrets 中设置 `CRON_SCHEDULE`
+1. 在 GitHub **Variables** 中设置 `CRON_SCHEDULE`（推荐，可随时查看和修改）
 2. 直接修改 `.github/workflows/git-monitor.yml` 中的 `cron` 值
 
 ### Q: API 限流怎么办？

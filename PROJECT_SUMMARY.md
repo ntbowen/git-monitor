@@ -83,23 +83,24 @@ GitHub Repo → GitHub API → Monitor Script → Notification Services
 
 ## 配置说明
 
-### 必需配置
+### Variables 配置（非敏感信息）
 
 | 配置项 | 说明 | 示例 |
 |--------|------|------|
-| MONITORED_REPO | 监控的仓库 | `owner/repo` |
-
-### 可选配置
-
-| 配置项 | 说明 | 默认值 |
-|--------|------|--------|
-| TELEGRAM_BOT_TOKEN | Telegram Bot Token | - |
-| TELEGRAM_CHAT_ID | Telegram Chat ID | - |
-| WXPUSHER_APP_TOKEN | WxPusher App Token | - |
-| WXPUSHER_UID | WxPusher 用户 UID | - |
-| PUSHPLUS_TOKEN | PushPlus Token | - |
-| GH_PAT | GitHub Personal Access Token | 可选 |
+| MONITORED_REPOS | 监控的仓库列表（多个仓库用逗号分隔） | `owner1/repo1,owner2/repo2` |
+| MONITORED_REPO | 监控单个仓库（向后兼容） | `owner/repo` |
 | CRON_SCHEDULE | Cron 表达式 | `0 * * * *` |
+
+### Secrets 配置（敏感信息）
+
+| 配置项 | 说明 | 用途 |
+|--------|------|------|
+| TELEGRAM_BOT_TOKEN | Telegram Bot Token | Telegram 通知 |
+| TELEGRAM_CHAT_ID | Telegram Chat ID | Telegram 通知 |
+| WXPUSHER_APP_TOKEN | WxPusher App Token | 微信通知 |
+| WXPUSHER_UID | WxPusher 用户 UID | 微信通知 |
+| PUSHPLUS_TOKEN | PushPlus Token | 微信通知 |
+| GH_PAT | GitHub Personal Access Token | 提高 API 限制/私有仓库 |
 
 ## API 限制
 
