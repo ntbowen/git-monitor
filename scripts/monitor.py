@@ -351,13 +351,17 @@ def main():
         print("❌ 错误: 仓库列表为空")
         return
     
-    # 去重（保持顺序）
-    repos = list(dict.fromkeys(repos_raw))
+    # 去重
+    repos_unique = list(dict.fromkeys(repos_raw))
     
     # 显示去重信息
-    if len(repos) < len(repos_raw):
-        duplicate_count = len(repos_raw) - len(repos)
+    if len(repos_unique) < len(repos_raw):
+        duplicate_count = len(repos_raw) - len(repos_unique)
         print(f"⚠️ 发现 {duplicate_count} 个重复仓库，已自动去重")
+    
+    # 排序（按字母顺序，不区分大小写）
+    repos = sorted(repos_unique, key=str.lower)
+    print("✓ 仓库列表已按字母顺序排序")
     
     github_token = os.getenv("GITHUB_TOKEN")
     telegram_token = os.getenv("TELEGRAM_BOT_TOKEN")
