@@ -2,14 +2,26 @@
 
 在启动监控前，请按此清单逐项检查。
 
-## 📋 GitHub Secrets 配置
+## 📋 GitHub Variables 配置（非敏感信息）
+
+路径：Settings → Secrets and variables → Actions → **Variables** 标签页
 
 ### 必需项
 
 - [ ] **MONITORED_REPOS** 或 **MONITORED_REPO** 已配置
   - **多仓库**：`MONITORED_REPOS=owner1/repo1,owner2/repo2`
   - **单仓库**：`MONITORED_REPO=owner/repo`
-  - 路径：Settings → Secrets and variables → Actions
+  - 💡 使用 Variable 可以随时查看和编辑
+
+### 可选项
+
+- [ ] **CRON_SCHEDULE** 已配置（自定义检查频率）
+  - 默认：`0 * * * *`（每小时）
+  - 示例：`0 */6 * * *`（每6小时）
+
+## 🔐 GitHub Secrets 配置（敏感信息）
+
+路径：Settings → Secrets and variables → Actions → **Secrets** 标签页
 
 ### Telegram 配置（二选一或全选）
 
@@ -35,16 +47,13 @@
   - 从 www.pushplus.plus 获取
   - 格式：Token 字符串
 
-### 可选优化
+### 高级配置（可选）
 
 - [ ] **GH_PAT** 已配置（提高 API 限制或访问私有仓库）
   - 从 GitHub Settings → Developer settings 创建 Personal Access Token
   - 权限：`public_repo`（公开仓库）或 `repo`（私有仓库）
   - ⚠️ 注意：Secret 名称不能以 `GITHUB_` 开头，使用 `GH_PAT`
-
-- [ ] **CRON_SCHEDULE** 已配置（自定义频率）
-  - 默认：`0 * * * *`（每小时）
-  - 常用值见下方说明
+  - 默认提供的 token（1000次/小时）通常已足够
 
 ## 🔧 GitHub Actions 配置
 

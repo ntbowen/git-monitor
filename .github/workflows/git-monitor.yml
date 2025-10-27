@@ -2,7 +2,7 @@ name: Git Repository Monitor
 
 on:
   schedule:
-    # 默认每小时执行一次，可通过 CRON_SCHEDULE secret 自定义
+    # 默认每小时执行一次，可通过 CRON_SCHEDULE variable 自定义
     - cron: '0 * * * *'
   workflow_dispatch:  # 允许手动触发
 
@@ -28,9 +28,11 @@ jobs:
         
     - name: Run monitor script
       env:
-        MONITORED_REPOS: ${{ secrets.MONITORED_REPOS }}
-        MONITORED_REPO: ${{ secrets.MONITORED_REPO }}
-        CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
+        # 非敏感信息：使用 Variables（向后兼容 Secrets）
+        MONITORED_REPOS: ${{ vars.MONITORED_REPOS || secrets.MONITORED_REPOS }}
+        MONITORED_REPO: ${{ vars.MONITORED_REPO || secrets.MONITORED_REPO }}
+        CRON_SCHEDULE: ${{ vars.CRON_SCHEDULE || secrets.CRON_SCHEDULE }}
+        # 敏感信息：使用 Secrets
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}

@@ -21,23 +21,35 @@ git clone <your-repo-url>
 cd <your-repo-name>
 ```
 
-### 2. 配置 GitHub Secrets
+### 2. 配置 GitHub Variables 和 Secrets
 
-在仓库的 **Settings → Secrets and variables → Actions** 中添加以下 secrets：
+进入仓库的 **Settings → Secrets and variables → Actions**
 
-#### 必需配置
+#### 📋 Variables（非敏感信息）- 推荐
 
-| Secret 名称 | 说明 | 示例 |
+在 **Variables** 标签页添加：
+
+| Variable 名称 | 说明 | 示例 |
 |------------|------|------|
 | `MONITORED_REPOS` | 要监控的仓库列表（多个仓库用逗号分隔） | `torvalds/linux,microsoft/vscode` |
-| `MONITORED_REPO` | 单个仓库监控（向后兼容，建议使用上面的） | `torvalds/linux` |
+| `MONITORED_REPO` | 单个仓库监控（向后兼容） | `torvalds/linux` |
+| `CRON_SCHEDULE` | 定时任务间隔（可选） | `0 */6 * * *` |
+
+**优势：**
+- ✅ 可直接查看和编辑，无需重新输入
+- ✅ 非敏感信息无需加密
+- ✅ 更方便管理
 
 **说明：**
 - 优先使用 `MONITORED_REPOS` 支持多仓库监控
 - 多个仓库用英文逗号分隔，如：`owner1/repo1,owner2/repo2,owner3/repo3`
-- 如果只监控一个仓库，两个配置都可以使用
+- `CRON_SCHEDULE` 默认每小时执行，可自定义（如 `0 */6 * * *` 每6小时）
 
-#### Telegram 配置（可选）
+#### 🔐 Secrets（敏感信息）
+
+在 **Secrets** 标签页添加以下通知服务配置（至少选择一个）：
+
+##### Telegram 配置（可选）
 
 | Secret 名称 | 说明 | 获取方式 |
 |------------|------|---------|
@@ -52,7 +64,7 @@ cd <your-repo-name>
 4. 获得 Bot Token（格式：`1234567890:ABCdefGhIJKlmNoPQRsTUVwxyZ`）
 5. 搜索 `@userinfobot`，发送任意消息获取你的 Chat ID
 
-#### 微信配置（可选，选择其中一个或多个）
+##### 微信配置（可选，选择其中一个或多个）
 
 **方案1：WxPusher**
 
@@ -82,17 +94,23 @@ cd <your-repo-name>
 3. 在"发送消息"页面找到你的 `Token`
 4. 复制 Token 即可使用
 
-#### 可选配置
+##### 高级配置（可选）
 
-| Secret 名称 | 说明 | 默认值 |
-|------------|------|--------|
-| `CRON_SCHEDULE` | 定时任务 Cron 表达式 | `0 * * * *`（每小时） |
+| Secret 名称 | 说明 | 用途 |
+|------------|------|------|
+| `GH_PAT` | GitHub Personal Access Token | 提高 API 限制或访问私有仓库 |
 
-**Cron 表达式示例：**
-- `*/30 * * * *` - 每 30 分钟
-- `0 */2 * * *` - 每 2 小时
-- `0 */6 * * *` - 每 6 小时
-- `0 0 * * *` - 每天凌晨
+**何时需要配置 GH_PAT：**
+- 需要更高 API 限制（默认1000次/小时，PAT 可达5000次/小时）
+- 监控私有仓库（需要 `repo` 权限）
+
+**获取步骤：**
+1. GitHub 头像 → Settings → Developer settings
+2. Personal access tokens → Tokens (classic) → Generate new token
+3. 权限：`public_repo`（私有仓库需要 `repo`）
+4. 在 Secrets 中添加名为 `GH_PAT` 的 secret
+
+⚠️ **注意**：Secret 名称不能以 `GITHUB_` 开头
 
 ### 3. 启用 GitHub Actions
 

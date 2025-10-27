@@ -7,20 +7,28 @@
 进入你的 GitHub 仓库页面：
 
 ```
-Settings → Secrets and variables → Actions → New repository secret
+Settings → Secrets and variables → Actions
 ```
 
 ### 最小配置（必需）
 
-添加一个 secret：
+#### 步骤1：添加 Variable
+
+切换到 **Variables** 标签页，点击 **New repository variable**：
 
 **监控多个仓库（推荐）：**
 - **Name**: `MONITORED_REPOS`
-- **Secret**: `torvalds/linux,microsoft/vscode` （替换为你要监控的仓库，用逗号分隔）
+- **Value**: `torvalds/linux,microsoft/vscode` （替换为你要监控的仓库，用逗号分隔）
 
 **或监控单个仓库：**
 - **Name**: `MONITORED_REPO`
-- **Secret**: `torvalds/linux` （替换为你要监控的仓库）
+- **Value**: `torvalds/linux` （替换为你要监控的仓库）
+
+💡 **为什么用 Variable？** 非敏感信息无需加密，使用 Variable 可以随时查看和编辑，更方便！
+
+#### 步骤2：添加通知 Secret
+
+切换到 **Secrets** 标签页，添加至少一个通知渠道：
 
 ### Telegram 配置（推荐）
 
@@ -75,12 +83,14 @@ Settings → Secrets and variables → Actions → New repository secret
 
 ### 修改检查频率
 
-添加 `CRON_SCHEDULE` secret：
+在 **Variables** 标签页添加 `CRON_SCHEDULE` variable：
 
 - 每 30 分钟: `*/30 * * * *`
 - 每 2 小时: `0 */2 * * *`
 - 每 6 小时: `0 */6 * * *`
 - 每天一次: `0 0 * * *`
+
+💡 使用 Variable 而非 Secret，方便随时查看和修改！
 
 ### 提高 API 限制（可选）
 
