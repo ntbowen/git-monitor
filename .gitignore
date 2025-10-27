@@ -1,6 +1,3 @@
-# Monitor state file
-.monitor_state.json
-
 # Python
 __pycache__/
 *.py[cod]
