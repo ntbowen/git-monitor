@@ -30,10 +30,10 @@
     "last_check": "2025-10-27T11:50:20.153697"
   },
   "byJoey/cfnew": {
-    "last_commit": "4b79eab",
+    "last_commit": "28da398",
     "last_tag": "v1.1.3",
     "last_release": null,
-    "last_check": "2025-10-27T11:50:20.480181"
+    "last_check": "2025-10-27T13:34:08.813916"
   },
   "byJoey/yx-tools": {
     "last_commit": "43784c4",
@@ -108,10 +108,10 @@
     "last_check": "2025-10-27T11:50:27.272801"
   },
   "containers/podman": {
-    "last_commit": "5a0b74b",
+    "last_commit": "8f08e81",
     "last_tag": "v5.7.0-rc1",
     "last_release": "v5.6.2",
-    "last_check": "2025-10-27T11:50:27.937420"
+    "last_check": "2025-10-27T13:34:18.165639"
   },
   "containers/podman-tui": {
     "last_commit": "9568df3",
