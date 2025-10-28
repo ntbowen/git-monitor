@@ -32,6 +32,10 @@ jobs:
         MONITORED_REPOS: ${{ vars.MONITORED_REPOS || secrets.MONITORED_REPOS }}
         MONITORED_REPO: ${{ vars.MONITORED_REPO || secrets.MONITORED_REPO }}
         CRON_SCHEDULE: ${{ vars.CRON_SCHEDULE || secrets.CRON_SCHEDULE }}
+        # 监控内容配置（可选，默认全部启用）
+        MONITOR_COMMITS: ${{ vars.MONITOR_COMMITS || 'true' }}
+        MONITOR_TAGS: ${{ vars.MONITOR_TAGS || 'true' }}
+        MONITOR_RELEASES: ${{ vars.MONITOR_RELEASES || 'true' }}
         # 敏感信息：使用 Secrets
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

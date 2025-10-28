@@ -33,6 +33,9 @@ cd <your-repo-name>
 |------------|------|------|
 | `MONITORED_REPOS` | 要监控的仓库列表（多个仓库用逗号分隔） | `torvalds/linux,microsoft/vscode` |
 | `MONITORED_REPO` | 单个仓库监控（向后兼容） | `torvalds/linux` |
+| `MONITOR_COMMITS` | 是否监控 commits（可选） | `true` / `false` |
+| `MONITOR_TAGS` | 是否监控 tags（可选） | `true` / `false` |
+| `MONITOR_RELEASES` | 是否监控 releases（可选） | `true` / `false` |
 
 **优势：**
 - ✅ 可直接查看和编辑，无需重新输入
@@ -42,6 +45,21 @@ cd <your-repo-name>
 **说明：**
 - 优先使用 `MONITORED_REPOS` 支持多仓库监控
 - 多个仓库用英文逗号分隔，如：`owner1/repo1,owner2/repo2,owner3/repo3`
+- 监控内容配置默认全部启用（`true`），可设置为 `false` 禁用
+- 支持灵活组合，如：只监控 tags 和 releases，不监控 commits
+
+**监控内容配置示例：**
+```
+# 只监控 releases
+MONITOR_COMMITS=false
+MONITOR_TAGS=false
+MONITOR_RELEASES=true
+
+# 只监控 tags 和 releases
+MONITOR_COMMITS=false
+MONITOR_TAGS=true
+MONITOR_RELEASES=true
+```
 
 #### 🔐 Secrets（敏感信息）
 

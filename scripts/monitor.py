@@ -302,7 +302,8 @@ def format_release_message(release: Dict, repo: str) -> tuple:
     return title, content, release['url']
 
 
-def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonitor, notifiers: List):
+def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonitor, notifiers: List, 
+                      monitor_commits: bool = True, monitor_tags: bool = True, monitor_releases: bool = True):
     """监控单个仓库"""
     print(f"\n📦 监控仓库: {repo}")
     print("-" * 60)
@@ -310,8 +311,13 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
     repo_state = state_mgr.get_repo_state(repo)
     
     # 检查 commits
-    print("🔍 检查最新 commit...")
-    latest_commit = monitor.get_latest_commit()
+    if monitor_commits:
+        print("🔍 检查最新 commit...")
+        latest_commit = monitor.get_latest_commit()
+    else:
+        print("⏭️  跳过 commit 检查（已禁用）")
+        latest_commit = None
+    
     if latest_commit:
         if repo_state["last_commit"] != latest_commit["sha"]:
             if repo_state["last_commit"] is not None:  # 不是首次运行
@@ -328,8 +334,13 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
             print("  无新 commit")
     
     # 检查 tags
-    print("🔍 检查最新 tag...")
-    latest_tag = monitor.get_latest_tag()
+    if monitor_tags:
+        print("🔍 检查最新 tag...")
+        latest_tag = monitor.get_latest_tag()
+    else:
+        print("⏭️  跳过 tag 检查（已禁用）")
+        latest_tag = None
+    
     if latest_tag:
         if repo_state["last_tag"] != latest_tag["name"]:
             if repo_state["last_tag"] is not None:
@@ -346,8 +357,13 @@ def monitor_repository(repo: str, state_mgr: StateManager, monitor: GitHubMonito
             print("  无新 tag")
     
     # 检查 releases
-    print("🔍 检查最新 release...")
-    latest_release = monitor.get_latest_release()
+    if monitor_releases:
+        print("🔍 检查最新 release...")
+        latest_release = monitor.get_latest_release()
+    else:
+        print("⏭️  跳过 release 检查（已禁用）")
+        latest_release = None
+    
     if latest_release:
         if repo_state["last_release"] != latest_release["tag"]:
             if repo_state["last_release"] is not None:
@@ -401,9 +417,19 @@ def main():
     wxpusher_uid = os.getenv("WXPUSHER_UID")
     pushplus_token = os.getenv("PUSHPLUS_TOKEN")
     
+    # 读取监控配置（默认全部监控）
+    monitor_commits = os.getenv("MONITOR_COMMITS", "true").lower() in ("true", "1", "yes")
+    monitor_tags = os.getenv("MONITOR_TAGS", "true").lower() in ("true", "1", "yes")
+    monitor_releases = os.getenv("MONITOR_RELEASES", "true").lower() in ("true", "1", "yes")
+    
     print(f"📋 监控仓库数量: {len(repos)}")
     for i, repo in enumerate(repos, 1):
         print(f"   {i}. {repo}")
+    
+    print(f"\n📊 监控内容配置:")
+    print(f"   • Commits:  {'✓ 启用' if monitor_commits else '✗ 禁用'}")
+    print(f"   • Tags:     {'✓ 启用' if monitor_tags else '✗ 禁用'}")
+    print(f"   • Releases: {'✓ 启用' if monitor_releases else '✗ 禁用'}")
     
     # 初始化服务
     state_mgr = StateManager()
@@ -428,7 +454,8 @@ def main():
     for repo in repos:
         try:
             monitor = GitHubMonitor(repo, github_token)
-            monitor_repository(repo, state_mgr, monitor, notifiers)
+            monitor_repository(repo, state_mgr, monitor, notifiers, 
+                             monitor_commits, monitor_tags, monitor_releases)
         except Exception as e:
             print(f"❌ 监控仓库 {repo} 时出错: {e}")
             continue
