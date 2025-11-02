@@ -250,5 +250,11 @@
     "last_tag": "serv00",
     "last_release": "serv00",
     "last_check": "2025-10-27T11:50:41.173080"
+  },
+  "eooce/CF-Workers-and-Snip-VLESS": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
   }
 }
