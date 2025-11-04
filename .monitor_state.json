@@ -31,9 +31,9 @@
   },
   "byJoey/cfnew": {
     "last_commit": "b1e5bb5",
-    "last_tag": "v2.1",
-    "last_release": "v2.1",
-    "last_check": "2025-11-04T10:26:30.150663"
+    "last_tag": "v2.1.0",
+    "last_release": "v2.1.0",
+    "last_check": "2025-11-04T12:50:20.693658"
   },
   "byJoey/yx-tools": {
     "last_commit": "43784c4",
@@ -193,9 +193,9 @@
   },
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
-    "last_tag": "mineru-2.6.3-released",
-    "last_release": "mineru-2.6.3-released",
-    "last_check": "2025-10-31T07:20:42.475407"
+    "last_tag": "mineru-2.6.4-released",
+    "last_release": "mineru-2.6.4-released",
+    "last_check": "2025-11-04T12:50:39.354386"
   },
   "orion-lib/OrionTV": {
     "last_commit": "3526189",
