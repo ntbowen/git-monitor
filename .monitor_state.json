@@ -103,9 +103,9 @@
   },
   "containers/netavark": {
     "last_commit": "ca86815",
-    "last_tag": "v1.16.1",
-    "last_release": "v1.16.1",
-    "last_check": "2025-10-27T11:50:27.272801"
+    "last_tag": "v1.17.0",
+    "last_release": "v1.17.0",
+    "last_check": "2025-11-12T15:26:09.346149"
   },
   "containers/podman": {
     "last_commit": "bb94d57",
