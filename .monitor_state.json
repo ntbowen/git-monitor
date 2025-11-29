@@ -256,5 +256,17 @@
     "last_tag": null,
     "last_release": null,
     "last_check": null
+  },
+  "alienwaregf/CF-Worker-BestIP-collector-UI": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
+  },
+  "ethgan/CF-Worker-BestIP-collector": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
   }
 }
