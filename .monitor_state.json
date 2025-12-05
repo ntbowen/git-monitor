@@ -1,9 +1,9 @@
 {
   "7Sageer/sublink-worker": {
     "last_commit": "62aa934",
-    "last_tag": "v2.0.0",
-    "last_release": "v2.0.0",
-    "last_check": "2025-12-04T07:23:46.801058"
+    "last_tag": "v2.0.1",
+    "last_release": "v2.0.1",
+    "last_check": "2025-12-05T12:48:41.266495"
   },
   "bee-san/RustScan": {
     "last_commit": "2600036",
@@ -223,9 +223,9 @@
   },
   "sunnyyoung/WeChatTweak-macOS": {
     "last_commit": "1eee214",
-    "last_tag": "2.0-beta2",
+    "last_tag": "2.0-beta3",
     "last_release": "1.5.0",
-    "last_check": "2025-12-05T10:25:48.948876"
+    "last_check": "2025-12-05T12:48:55.407641"
   },
   "wolopo/newtv": {
     "last_commit": "abacda0",
