@@ -268,5 +268,11 @@
     "last_tag": null,
     "last_release": null,
     "last_check": null
+  },
+  "iDescriptor/iDescriptor": {
+    "last_commit": null,
+    "last_tag": "v0.1.0",
+    "last_release": "v0.1.0",
+    "last_check": "2025-12-05T04:32:12.574718"
   }
 }
