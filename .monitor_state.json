@@ -103,9 +103,9 @@
   },
   "containers/netavark": {
     "last_commit": "ca86815",
-    "last_tag": "v1.17.0",
-    "last_release": "v1.17.0",
-    "last_check": "2025-11-12T15:26:09.346149"
+    "last_tag": "v1.17.1",
+    "last_release": "v1.17.1",
+    "last_check": "2025-12-09T16:30:59.570864"
   },
   "containers/podman": {
     "last_commit": "bb94d57",
@@ -223,9 +223,9 @@
   },
   "sunnyyoung/WeChatTweak-macOS": {
     "last_commit": "1eee214",
-    "last_tag": "2.0.0",
-    "last_release": "2.0.0",
-    "last_check": "2025-12-07T06:32:21.818674"
+    "last_tag": "2.0.1",
+    "last_release": "2.0.1",
+    "last_check": "2025-12-09T16:31:17.974129"
   },
   "wolopo/newtv": {
     "last_commit": "abacda0",
