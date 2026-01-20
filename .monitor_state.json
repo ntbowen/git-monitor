@@ -280,5 +280,11 @@
     "last_tag": null,
     "last_release": null,
     "last_check": null
+  },
+  "k4yt3x/video2x": {
+    "last_commit": null,
+    "last_tag": "6.4.0",
+    "last_release": "6.4.0",
+    "last_check": "2026-01-20T01:58:55.130470"
   }
 }
