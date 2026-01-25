@@ -151,9 +151,9 @@
   },
   "jianchang512/pyvideotrans": {
     "last_commit": "e907851",
-    "last_tag": "v3.91",
-    "last_release": "v3.91",
-    "last_check": "2025-12-18T12:50:22.514423"
+    "last_tag": "v3.95",
+    "last_release": "v3.95",
+    "last_check": "2026-01-25T16:30:01.224340"
   },
   "jianchang512/stt": {
     "last_commit": "b3c9a27",
@@ -289,8 +289,8 @@
   },
   "Diorser/LiteMonitor": {
     "last_commit": null,
-    "last_tag": "v1.2.7",
-    "last_release": "v1.2.7",
-    "last_check": "2026-01-23T01:58:28.578593"
+    "last_tag": "v1.2.8",
+    "last_release": "v1.2.8",
+    "last_check": "2026-01-25T16:29:53.396629"
   }
 }
