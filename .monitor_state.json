@@ -259,9 +259,9 @@
   },
   "alienwaregf/CF-Worker-BestIP-collector-UI": {
     "last_commit": null,
-    "last_tag": null,
-    "last_release": null,
-    "last_check": null
+    "last_tag": "Pages",
+    "last_release": "Pages",
+    "last_check": "2026-02-01T19:27:26.820725"
   },
   "ethgan/CF-Worker-BestIP-collector": {
     "last_commit": null,
