@@ -110,8 +110,8 @@
   "containers/podman": {
     "last_commit": "bb94d57",
     "last_tag": "v5.8.2",
-    "last_release": "v5.8.1",
-    "last_check": "2026-04-14T13:50:20.667450"
+    "last_release": "v5.8.2",
+    "last_check": "2026-04-14T19:20:50.796210"
   },
   "containers/podman-tui": {
     "last_commit": "9568df3",
