@@ -292,5 +292,35 @@
     "last_tag": "v1.3.4",
     "last_release": "v1.3.4",
     "last_check": "2026-02-12T02:33:45.622185"
+  },
+  "immortalwrt/luci": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
+  },
+  "immortalwrt/packages": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
+  },
+  "openwrt/routing": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
+  },
+  "openwrt/telephony": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
+  },
+  "openwrt/video": {
+    "last_commit": null,
+    "last_tag": null,
+    "last_release": null,
+    "last_check": null
   }
 }
