@@ -289,9 +289,9 @@
   },
   "Diorser/LiteMonitor": {
     "last_commit": null,
-    "last_tag": "v1.3.4",
-    "last_release": "v1.3.4",
-    "last_check": "2026-02-12T02:33:45.622185"
+    "last_tag": "v1.3.5",
+    "last_release": "v1.3.5",
+    "last_check": "2026-05-14T22:59:07.704776"
   },
   "immortalwrt/luci": {
     "last_commit": null,
