@@ -139,9 +139,9 @@
   },
   "immortalwrt/immortalwrt": {
     "last_commit": "14d864f",
-    "last_tag": "v25.12.0-rc2",
+    "last_tag": "v25.12.0",
     "last_release": null,
-    "last_check": "2026-04-14T07:52:04.020548"
+    "last_check": "2026-05-25T05:21:51.754991"
   },
   "jianchang512/gemini-speech2srt": {
     "last_commit": "2361627",
