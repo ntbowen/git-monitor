@@ -115,9 +115,9 @@
   },
   "containers/podman-tui": {
     "last_commit": "9568df3",
-    "last_tag": "v1.11.2",
-    "last_release": "v1.11.2",
-    "last_check": "2026-06-20T05:17:07.509495"
+    "last_tag": "v1.11.3",
+    "last_release": "v1.11.3",
+    "last_check": "2026-06-28T08:22:43.307792"
   },
   "Coporton/IDM-Activation-Script": {
     "last_commit": "88fed2a",
