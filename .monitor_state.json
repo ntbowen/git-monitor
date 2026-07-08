@@ -151,9 +151,9 @@
   },
   "jianchang512/pyvideotrans": {
     "last_commit": "e907851",
-    "last_tag": "v4.04",
-    "last_release": "v4.04",
-    "last_check": "2026-07-04T14:39:37.635022"
+    "last_tag": "v4.05",
+    "last_release": "v4.05",
+    "last_check": "2026-07-08T08:33:11.881760"
   },
   "jianchang512/stt": {
     "last_commit": "b3c9a27",
@@ -193,9 +193,9 @@
   },
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
-    "last_tag": "mineru-3.4.2-released",
-    "last_release": "mineru-3.4.2-released",
-    "last_check": "2026-07-03T14:11:51.423831"
+    "last_tag": "mineru-3.4.3-released",
+    "last_release": "mineru-3.4.3-released",
+    "last_check": "2026-07-08T08:33:19.110193"
   },
   "orion-lib/OrionTV": {
     "last_commit": "3526189",
