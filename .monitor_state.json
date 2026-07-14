@@ -193,9 +193,9 @@
   },
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
-    "last_tag": "mineru-3.4.4-released",
+    "last_tag": "v4.0.0a1",
     "last_release": "mineru-3.4.4-released",
-    "last_check": "2026-07-10T14:33:03.954447"
+    "last_check": "2026-07-14T08:10:31.358897"
   },
   "orion-lib/OrionTV": {
     "last_commit": "3526189",
