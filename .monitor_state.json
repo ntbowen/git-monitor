@@ -127,9 +127,9 @@
   },
   "fastfetch-cli/fastfetch": {
     "last_commit": "ac62442",
-    "last_tag": "2.67.0",
-    "last_release": "2.67.0",
-    "last_check": "2026-08-06T08:40:05.456175"
+    "last_tag": "2.67.1",
+    "last_release": "2.67.1",
+    "last_check": "2026-08-14T08:17:18.882025"
   },
   "fujiapple852/trippy": {
     "last_commit": "346fc1c",
@@ -194,8 +194,8 @@
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
     "last_tag": "v4.0.0a5",
-    "last_release": "mineru-3.4.4-released",
-    "last_check": "2026-07-30T17:36:50.133632"
+    "last_release": "mineru-3.4.5-released",
+    "last_check": "2026-08-14T08:17:29.298284"
   },
   "orion-lib/OrionTV": {
     "last_commit": "3526189",
