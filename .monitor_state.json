@@ -151,9 +151,9 @@
   },
   "jianchang512/pyvideotrans": {
     "last_commit": "e907851",
-    "last_tag": "v4.10",
-    "last_release": "v4.10",
-    "last_check": "2026-08-17T05:36:34.546667"
+    "last_tag": "v4.11",
+    "last_release": "v4.11",
+    "last_check": "2026-08-23T14:25:34.245997"
   },
   "jianchang512/stt": {
     "last_commit": "b3c9a27",
@@ -218,8 +218,8 @@
   "sqzw-x/mdcx": {
     "last_commit": "de3dc94",
     "last_tag": "python3.13",
-    "last_release": "220250909",
-    "last_check": "2025-10-27T11:50:38.353637"
+    "last_release": "220260823",
+    "last_check": "2026-08-23T14:25:42.960723"
   },
   "sunnyyoung/WeChatTweak-macOS": {
     "last_commit": "1eee214",
