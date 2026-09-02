@@ -109,9 +109,9 @@
   },
   "containers/podman": {
     "last_commit": "bb94d57",
-    "last_tag": "v6.1.0",
-    "last_release": "v6.1.0",
-    "last_check": "2026-08-12T20:48:59.566437"
+    "last_tag": "v6.1.1",
+    "last_release": "v6.1.1",
+    "last_check": "2026-09-02T17:42:10.349729"
   },
   "containers/podman-tui": {
     "last_commit": "9568df3",
