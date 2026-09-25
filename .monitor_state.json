@@ -98,8 +98,8 @@
   "containers/crun": {
     "last_commit": "1737128",
     "last_tag": "v0.3",
-    "last_release": "1.30",
-    "last_check": "2026-09-24T13:22:28.986460"
+    "last_release": "1.30.1",
+    "last_check": "2026-09-25T07:18:14.346598"
   },
   "containers/netavark": {
     "last_commit": "ca86815",
