@@ -151,9 +151,9 @@
   },
   "jianchang512/pyvideotrans": {
     "last_commit": "e907851",
-    "last_tag": "v4.13",
-    "last_release": "v4.13",
-    "last_check": "2026-09-20T10:53:50.346877"
+    "last_tag": "v4.14",
+    "last_release": "v4.14",
+    "last_check": "2026-09-26T07:14:07.767283"
   },
   "jianchang512/stt": {
     "last_commit": "b3c9a27",
@@ -175,9 +175,9 @@
   },
   "LibreSpark/LibreTV": {
     "last_commit": "78ee8bb",
-    "last_tag": "v2.13.0",
+    "last_tag": "v2.14.0",
     "last_release": "v2.12.4",
-    "last_check": "2026-09-25T13:22:52.464091"
+    "last_check": "2026-09-26T07:14:11.735079"
   },
   "MoonTechLab/LunaTV": {
     "last_commit": "9906b5b",
