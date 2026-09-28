@@ -175,9 +175,9 @@
   },
   "LibreSpark/LibreTV": {
     "last_commit": "78ee8bb",
-    "last_tag": "v2.16.3",
+    "last_tag": "v2.16.5",
     "last_release": "v2.12.4",
-    "last_check": "2026-09-28T15:04:47.890744"
+    "last_check": "2026-09-28T21:40:11.263854"
   },
   "MoonTechLab/LunaTV": {
     "last_commit": "9906b5b",
@@ -194,8 +194,8 @@
   "opendatalab/MinerU": {
     "last_commit": "eb02745",
     "last_tag": "v4.0.0a6",
-    "last_release": "mineru-4.0.8-released",
-    "last_check": "2026-09-27T21:54:06.221911"
+    "last_release": "mineru-4.0.9-released",
+    "last_check": "2026-09-28T21:40:16.118088"
   },
   "orion-lib/OrionTV": {
     "last_commit": "3526189",
